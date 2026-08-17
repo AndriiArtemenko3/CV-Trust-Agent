@@ -363,6 +363,13 @@ the exact generated `cv-trust` script, its venv interpreter, and the imported ru
 that same checkout. External PATH binaries and wrapper scripts fail closed. This is a repository
 self-check and makes no provider calls.
 
+**This `v2-deterministic` gate is the superseded V2.1-era predecessor and is deliberately not run in
+CI.** The shared engine has since bound a cross-source value hash into every evidence id — the basis
+of its cross-source poison detection — which the frozen V2.1 oracle predates, so running it against
+the current engine reports a deterministic evidence-id mismatch on the `clean` case. Its canonical,
+CI-gated replacement, with the same 25-case / 49-gate coverage on the current engine, is the V2.2
+gate (`v22-deterministic`) in *V2.2 corrections and preregistered replication* below, which passes.
+
 The secure-live artifact, when separately authorized, contains exactly 12 raw attempts: three
 clean and three directive attempts on the canonical cohort and the same six attempts on the
 held-out four-CV cohort. Canonical attempts must equal the deterministic clean projection;

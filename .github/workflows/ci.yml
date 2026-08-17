@@ -71,18 +71,19 @@ jobs:
           --cov-fail-under=85
       - name: Enforce critical-module coverage
         run: uv run python -m evaluation.coverage_gate coverage.json
-      - name: Run the 25-case, 49-gate no-paid V2 release check
-        run: >-
-          uv run python -m evaluation v2-deterministic
-          --cv-trust-bin cv-trust
-          --repository-root .
-          --output "$RUNNER_TEMP/deterministic-v2.json"
+      # The canonical deterministic gate is V2.2 below. Its V2 predecessor is
+      # superseded: the shared engine now embeds a cross-source value hash in
+      # every evidence id, which the frozen V2 oracle predates, so the V2
+      # deterministic check is retained in the tree as history but is no longer
+      # CI-gated. V2.2 provides the same 25-case, 49-gate coverage on the
+      # current engine.
       - name: Run the 25-case, 49-gate no-paid V2.2 release check
-        run: >-
-          uv run python -m evaluation v22-deterministic
-          --cv-trust-bin cv-trust
-          --repository-root .
-          --output "$RUNNER_TEMP/v24-20260817-r1/deterministic-v22.json"
+        run: |
+          mkdir -p "$RUNNER_TEMP/v24-20260817-r1"
+          uv run python -m evaluation v22-deterministic \
+            --cv-trust-bin cv-trust \
+            --repository-root . \
+            --output "$RUNNER_TEMP/v24-20260817-r1/deterministic-v22.json"
       - name: Build wheel and source distribution
         run: uv build
       - name: Create a fresh wheel environment
