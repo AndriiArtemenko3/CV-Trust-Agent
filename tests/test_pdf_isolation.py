@@ -19,7 +19,7 @@ from cv_trust_agent.pdf_evidence import (
 )
 
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-_VALID_RESUME = _REPOSITORY_ROOT / "fixtures/generated/resumes/AP-001.pdf"
+_VALID_RESUME = _REPOSITORY_ROOT / "data/corpus/resumes/AP-001.pdf"
 
 
 @pytest.fixture(scope="module")

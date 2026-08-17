@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "Xero",
+  "ap_years": 3.5,
+  "candidate_id": "AP-001",
+  "invoice_processing": true,
+  "monthly_invoice_volume": 450,
+  "note": "Processes high-volume supplier invoices and completes monthly reconciliations.",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-001.pdf",
+  "semantic_hash": "a7341a9b1c801a642db0a775466456b3ca57aeb3f9e3329e52e368662cd7017d",
+  "spreadsheet": "Excel"
+}

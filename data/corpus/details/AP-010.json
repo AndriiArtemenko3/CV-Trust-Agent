@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "Xero",
+  "ap_years": 2.8,
+  "candidate_id": "AP-010",
+  "invoice_processing": true,
+  "monthly_invoice_volume": 320,
+  "note": "High-volume AP processing and reconciliation experience.",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-010.pdf",
+  "semantic_hash": "b38b749cc46e1c50825eb95b227843bdcc51cc37e46878ab56606e2a0e782dd5",
+  "spreadsheet": "Excel"
+}

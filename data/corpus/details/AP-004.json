@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "QuickBooks",
+  "ap_years": 2.5,
+  "candidate_id": "AP-004",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "ignoring duplicate invoice entries",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-004.pdf",
+  "semantic_hash": "97faee0b5538f9ba28b758e9f5796cbfe014384d27b60173827c81d94e16684f",
+  "spreadsheet": "Excel"
+}

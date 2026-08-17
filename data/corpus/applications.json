@@ -1,0 +1,89 @@
+{
+  "batch_id": "ap-specialist-2026-08",
+  "batch_revision": "1",
+  "candidates": [
+    {
+      "candidate_id": "AP-001",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-001",
+      "record_revision": "1",
+      "resume_sha256": "7c6530e5297a404fd3ec302e2d0459fc215cad10a0bb3ef8412db451ae3c5a1e",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-001.pdf",
+      "semantic_hash": "a7341a9b1c801a642db0a775466456b3ca57aeb3f9e3329e52e368662cd7017d"
+    },
+    {
+      "candidate_id": "AP-002",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-002",
+      "record_revision": "1",
+      "resume_sha256": "06cf3e2af5eb2c05c3ceda8419a135fae91108dd7b51668ff5bb8bf12c3fb0ad",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-002.pdf",
+      "semantic_hash": "592db4d70e4c70a8ef62fc8010d63e2433722bd59f346a61f4574ce2cbb31141"
+    },
+    {
+      "candidate_id": "AP-003",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-003",
+      "record_revision": "1",
+      "resume_sha256": "9370e1c1b317294fc650ca00386a0e24ae0d35e20a33d8d97e29251a2240e48c",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-003.pdf",
+      "semantic_hash": "8a6b6261896c94590d522e2835dc71e8a38f4f377c7d131b0d2010de2677f27e"
+    },
+    {
+      "candidate_id": "AP-004",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-004",
+      "record_revision": "1",
+      "resume_sha256": "6cc0c2c0cc539e136dc602cdd5e50231489d7d31a087b7dd8a6cebc5f4ba0f04",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-004.pdf",
+      "semantic_hash": "97faee0b5538f9ba28b758e9f5796cbfe014384d27b60173827c81d94e16684f"
+    },
+    {
+      "candidate_id": "AP-005",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-005",
+      "record_revision": "1",
+      "resume_sha256": "2dd6a31f1752960c0bbe71818e926873b58a2a5ad6386906739a78543146c043",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-005.pdf",
+      "semantic_hash": "e96221c8cd2e29c4eddbbcc72c5539dd8af0fc4a99ccb06ddc03b5647d3ecf46"
+    },
+    {
+      "candidate_id": "AP-006",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-006",
+      "record_revision": "1",
+      "resume_sha256": "1df1f897b539c1ce4e8fffd5d8933212586a0bbedfa708b54f2a48f858a19543",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-006.pdf",
+      "semantic_hash": "80d5a70abdd72804470998a3ab46b5601321963d8095da03baf8eedd9deba0c2"
+    },
+    {
+      "candidate_id": "AP-007",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-007",
+      "record_revision": "1",
+      "resume_sha256": "162266e1fb08bcf1f18c98329adc8ff21517dc8cc6621eda8690759522ce1cb1",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-007.pdf",
+      "semantic_hash": "86de954aa5c957915189abf320eca1bc5ee63a2d5ed2babde572dc5c07357dd4"
+    },
+    {
+      "candidate_id": "AP-008",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-008",
+      "record_revision": "1",
+      "resume_sha256": "d6e7bbc4c2d7f1489219b95a4432cc224ac99d5219c16d9e4141c41d40d16c53",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-008.pdf",
+      "semantic_hash": "914c92839b6390195cef9c93a384f2d7b482a9bf1d5ee9cf465895f9ee7f8ecf"
+    },
+    {
+      "candidate_id": "AP-009",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-009",
+      "record_revision": "1",
+      "resume_sha256": "6f74815e02fe73b18c0e31779cbc8ab484dc2036bce05bed791e7beb9794ec8c",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-009.pdf",
+      "semantic_hash": "5a3ed4b3ded7496c45002ce095bd37fd3020c86c213e86d18ebde643c24499f6"
+    },
+    {
+      "candidate_id": "AP-010",
+      "detail_url": "http://127.0.0.1:8000/v1/applications/AP-010",
+      "record_revision": "1",
+      "resume_sha256": "afd11c5c844d39c4df01df51d9704dff86ce222b0a3505837b7619c3c6cfd708",
+      "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-010.pdf",
+      "semantic_hash": "b38b749cc46e1c50825eb95b227843bdcc51cc37e46878ab56606e2a0e782dd5"
+    }
+  ],
+  "fetched_at": "2026-08-15T09:00:00Z",
+  "index_id": "index-1",
+  "manifest_hash": "3add2c1b5e39464d063e4fa5e0b510cb872bc1464d1abbfbb9e1d767abf84639"
+}

@@ -1,0 +1,14 @@
+{
+  "accounting_platform": null,
+  "ap_years": 0.8,
+  "candidate_id": "AP-003",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "Invoice administration experience; no reconciliation ownership.",
+  "qualification": null,
+  "reconciliation": false,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-003.pdf",
+  "semantic_hash": "8a6b6261896c94590d522e2835dc71e8a38f4f377c7d131b0d2010de2677f27e",
+  "spreadsheet": "Excel"
+}

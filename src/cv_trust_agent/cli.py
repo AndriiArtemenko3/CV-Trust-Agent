@@ -68,7 +68,7 @@ from cv_trust_agent.retrieval import (
 )
 from cv_trust_agent.telemetry import JsonlTelemetrySink, TelemetrySink
 
-DEFAULT_FIXTURE_ROOT = Path("fixtures/generated")
+DEFAULT_FIXTURE_ROOT = Path("data/corpus")
 SOURCE_REQUEST_TIMEOUT_SECONDS = 0.5
 SOURCE_STARTUP_TIMEOUT_SECONDS = 8.0
 MAPPER_REQUEST_TIMEOUT_SECONDS = 30.0

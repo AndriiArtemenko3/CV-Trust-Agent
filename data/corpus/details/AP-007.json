@@ -1,0 +1,14 @@
+{
+  "accounting_platform": null,
+  "ap_years": 2.2,
+  "candidate_id": "AP-007",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "Handles invoice processing and account reconciliations.",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-007.pdf",
+  "semantic_hash": "86de954aa5c957915189abf320eca1bc5ee63a2d5ed2babde572dc5c07357dd4",
+  "spreadsheet": "Excel"
+}

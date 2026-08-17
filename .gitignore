@@ -12,7 +12,6 @@ __pycache__/
 coverage.json
 htmlcov/
 dist/
-fixtures/generated/
 run-traces/
 tmp/
 work/

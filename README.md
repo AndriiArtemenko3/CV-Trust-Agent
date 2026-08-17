@@ -252,7 +252,8 @@ conflict; low-contrast, microtext, off-page, and metadata hidden text; coherentl
 substitution; invalid manifest; detail timeout; white-box schema-aware injection. Source
 responses never expose scenario labels or expected outcomes. The held-out arm adds four
 separately authored CVs in unfamiliar layouts (prose, bullets, two-column, table) with frozen
-human labels. See [docs/DATASET.md](docs/DATASET.md).
+human labels. Browse the committed corpus in [`data/`](data/); the full card is
+[docs/DATASET.md](docs/DATASET.md).
 
 ## Research basis
 
@@ -310,6 +311,6 @@ The honest gaps I'd close next:
 ## Documentation map
 
 - [Architecture and trust boundary](docs/ARCHITECTURE.md)
-- [Synthetic dataset card](docs/DATASET.md)
+- [Browsable dataset](data/) and the [synthetic dataset card](docs/DATASET.md)
 - [Experiment protocol and engineering story](docs/EXPERIMENTS.md)
 - [Research foundations](docs/RESEARCH_FOUNDATIONS.md)

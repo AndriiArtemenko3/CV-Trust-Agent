@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "Sage",
+  "ap_years": 1.2,
+  "candidate_id": "AP-002",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "Supports invoice processing and supplier statement reconciliations.",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-002.pdf",
+  "semantic_hash": "592db4d70e4c70a8ef62fc8010d63e2433722bd59f346a61f4574ce2cbb31141",
+  "spreadsheet": "Excel"
+}

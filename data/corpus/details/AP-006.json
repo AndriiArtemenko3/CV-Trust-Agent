@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "NetSuite",
+  "ap_years": 1.5,
+  "candidate_id": "AP-006",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "AAT-qualified AP specialist with reconciliation ownership.",
+  "qualification": "AAT Level 3",
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-006.pdf",
+  "semantic_hash": "80d5a70abdd72804470998a3ab46b5601321963d8095da03baf8eedd9deba0c2",
+  "spreadsheet": "Excel"
+}

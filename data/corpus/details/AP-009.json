@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "SAP",
+  "ap_years": 0.0,
+  "candidate_id": "AP-009",
+  "invoice_processing": false,
+  "monthly_invoice_volume": null,
+  "note": "Purchase-order administration only.",
+  "qualification": null,
+  "reconciliation": false,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-009.pdf",
+  "semantic_hash": "5a3ed4b3ded7496c45002ce095bd37fd3020c86c213e86d18ebde643c24499f6",
+  "spreadsheet": "Excel"
+}

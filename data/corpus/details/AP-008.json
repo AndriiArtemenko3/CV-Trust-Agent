@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "SAP",
+  "ap_years": 1.0,
+  "candidate_id": "AP-008",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "Supports AP processing in SAP and monthly reconciliations.",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-008.pdf",
+  "semantic_hash": "914c92839b6390195cef9c93a384f2d7b482a9bf1d5ee9cf465895f9ee7f8ecf",
+  "spreadsheet": "Excel"
+}

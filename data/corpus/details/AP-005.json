@@ -1,0 +1,14 @@
+{
+  "accounting_platform": "Sage",
+  "ap_years": 1.5,
+  "candidate_id": "AP-005",
+  "invoice_processing": true,
+  "monthly_invoice_volume": null,
+  "note": "Processes invoices and reconciles supplier statements.",
+  "qualification": null,
+  "reconciliation": true,
+  "record_revision": "1",
+  "resume_url": "http://127.0.0.1:8000/v1/resumes/AP-005.pdf",
+  "semantic_hash": "e96221c8cd2e29c4eddbbcc72c5539dd8af0fc4a99ccb06ddc03b5647d3ecf46",
+  "spreadsheet": "Excel"
+}
