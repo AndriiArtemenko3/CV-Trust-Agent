@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality and package (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      UV_FROZEN: "1"
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+      - name: Install locked dependencies
+        run: uv sync --frozen --all-groups
+      - name: Build synthetic fixtures
+        run: uv run cv-trust fixtures build
+      - name: Validate synthetic fixtures
+        run: uv run cv-trust fixtures validate
+      - name: Lint
+        run: uv run ruff check .
+      - name: Format check
+        run: uv run ruff format --check .
+      - name: Type check
+        run: uv run mypy .
+      - name: Erase stale coverage data
+        run: uv run coverage erase
+      - name: Test
+        run: >-
+          uv run pytest
+          --cov=cv_trust_agent
+          --cov=evaluation.release_spec_v2
+          --cov=evaluation.deterministic_release_v2
+          --cov=evaluation.secure_release_v2
+          --cov=evaluation.naive_release_v2
+          --cov=evaluation.aggregate_v2
+          --cov=evaluation.release_spec_v22
+          --cov=evaluation.deterministic_release_v22
+          --cov=evaluation.secure_release_v22
+          --cov=evaluation.naive_release_v22
+          --cov=evaluation.aggregate_v22
+          --cov=evaluation.slot_ledger_v22
+          --cov=evaluation.property_gate_runner
+          --cov-branch
+          --cov-report=term-missing
+          --cov-report=json:coverage.json
+          --cov-fail-under=85
+      - name: Enforce critical-module coverage
+        run: uv run python -m evaluation.coverage_gate coverage.json
+      - name: Run the 25-case, 49-gate no-paid V2 release check
+        run: >-
+          uv run python -m evaluation v2-deterministic
+          --cv-trust-bin cv-trust
+          --repository-root .
+          --output "$RUNNER_TEMP/deterministic-v2.json"
+      - name: Run the 25-case, 49-gate no-paid V2.2 release check
+        run: >-
+          uv run python -m evaluation v22-deterministic
+          --cv-trust-bin cv-trust
+          --repository-root .
+          --output "$RUNNER_TEMP/v24-20260817-r1/deterministic-v22.json"
+      - name: Build wheel and source distribution
+        run: uv build
+      - name: Create a fresh wheel environment
+        run: uv venv --python "${{ matrix.python-version }}" "$RUNNER_TEMP/cv-trust-wheel"
+      - name: Export locked runtime dependencies
+        run: >-
+          uv export
+          --quiet
+          --format requirements.txt
+          --no-dev
+          --no-emit-project
+          --output-file "$RUNNER_TEMP/cv-trust-runtime-requirements.txt"
+      - name: Install locked runtime dependencies
+        run: >-
+          uv pip sync
+          --python "$RUNNER_TEMP/cv-trust-wheel/bin/python"
+          "$RUNNER_TEMP/cv-trust-runtime-requirements.txt"
+      - name: Install wheel with networking disabled
+        run: >-
+          uv pip install
+          --python "$RUNNER_TEMP/cv-trust-wheel/bin/python"
+          --offline
+          --no-deps
+          dist/*.whl
+      - name: Smoke-test the installed wheel with networking disabled
+        working-directory: ${{ runner.temp }}
+        run: |
+          uv pip check --python "$RUNNER_TEMP/cv-trust-wheel/bin/python"
+          "$RUNNER_TEMP/cv-trust-wheel/bin/python" -c "import cv_trust_agent; print(cv_trust_agent.__file__)"
+          "$RUNNER_TEMP/cv-trust-wheel/bin/cv-trust" --help
+          "$RUNNER_TEMP/cv-trust-wheel/bin/cv-trust" fixtures validate
