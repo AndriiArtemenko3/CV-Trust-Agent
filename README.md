@@ -275,15 +275,31 @@ Details and attribution: [docs/RESEARCH_FOUNDATIONS.md](docs/RESEARCH_FOUNDATION
 
 ## What I would do next
 
-1. V2.5 naive protocol with more Latin-square blocks for statistical power against control drift,
-   endpoint unchanged.
-2. Signed index/detail/document commitments with replay protection; corroboration across
-   independent sources.
-3. A larger, sealed, independently labelled CV benchmark (layouts, languages, OCR) before any
-   generalisation claim.
-4. Renderer/VLM disagreement checks and adversarial PDF testing beyond HCD-lite.
-5. Calibrated trust thresholds plus human appeal, fairness, privacy, and retention governance.
-6. Adaptive multi-record and coherent-forgery attacks under a preregistered protocol.
+The honest gaps I'd close next:
+
+1. **Make the one imperfect result airtight.** My baseline-attack test fell just short of a strict
+   statistical bar because random ranking noise sometimes masked the attack — I'd run more
+   measurement rounds until the real effect is unmistakable, without ever loosening the bar.
+2. **Prove the data is genuine, not just self-consistent.** Today the agent checks whether records
+   agree with one another but can't tell if a source was tampered with or replayed — I'd
+   cryptographically sign each fetched record and corroborate facts across more than one
+   independent source, so a single lying source can't get through.
+3. **Earn the right to claim it works on real CVs.** I've only tested extraction on four hand-built
+   resumes — before claiming it generalises I'd build a much larger, realistic set (varied layouts,
+   languages, and scanned/OCR pages), labelled by someone else and kept sealed so I can't quietly
+   tune to it.
+4. **Catch hidden text the way a human eye would.** My hidden-text detection currently uses simple
+   geometry and contrast rules — I'd add a check that renders the page the way a person (or a
+   vision model) sees it and flags anything the visible page and the extracted text disagree on,
+   and I'd attack my own PDF parser to find the gaps.
+5. **Make it safe for a real hiring decision, not just a demo.** The trust thresholds today are
+   placeholder values — before this touched anyone's application I'd calibrate them properly and
+   add the human and ethical scaffolding around it: a candidate appeal path, fairness checks,
+   privacy protection, and clear data-retention rules.
+6. **Test against smarter attackers.** Each attack today lives in a single record and stays fairly
+   static — I'd pit the harness against coordinated lies spread across several records, and against
+   a fully self-consistent forgery that agrees with itself everywhere, under the same preregistered,
+   no-cheating discipline I used throughout.
 
 ## Documentation map
 
