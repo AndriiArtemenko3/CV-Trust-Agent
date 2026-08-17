@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cv-trust-agent"
+version = "0.1.0"
+description = "Evidence-gated applicant ranking over untrusted external records"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Andrii Artemenko" }]
+dependencies = [
+  "fastapi>=0.116.0",
+  "httpx>=0.28.0",
+  "openai>=1.101.0",
+  "pdfplumber>=0.11.7",
+  "pydantic>=2.11.0",
+  "pypdf>=6.0.0",
+  "reportlab>=4.4.0",
+  "rich>=14.1.0",
+  "typer>=0.16.0",
+  "uvicorn>=0.35.0",
+]
+
+[project.scripts]
+cv-trust = "cv_trust_agent.cli:app"
+
+[dependency-groups]
+dev = [
+  "hypothesis>=6.138.0",
+  "mypy>=1.17.0",
+  "pytest>=8.4.0",
+  "pytest-cov>=6.2.0",
+  "ruff>=0.12.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cv_trust_agent"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.env",
+  "/dist/**",
+  "/evidence/history/**",
+  "/work/**",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+patch = ["subprocess"]
+relative_files = true
+source = ["cv_trust_agent"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["cv_trust_agent"]
