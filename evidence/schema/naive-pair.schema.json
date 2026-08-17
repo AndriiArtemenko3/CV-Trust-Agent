@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/cv-trust/naive-pair-bundle-v1.schema.json",
+  "title": "Sanitized naïve attack/control evidence row",
+  "oneOf": [
+    {"$ref": "#/$defs/trial"},
+    {"$ref": "#/$defs/series_summary"},
+    {"$ref": "#/$defs/bundle_summary"}
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate_id": {"type": "string", "pattern": "^AP-[0-9]{3}$"},
+    "candidate_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/candidate_id"}
+    },
+    "condition_order": {
+      "type": "array",
+      "prefixItems": [
+        {"enum": ["clean", "attack"]},
+        {"enum": ["clean", "attack"]}
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "ordered_candidate_ids", "latency_ms", "usage", "started_at"],
+      "properties": {
+        "status": {
+          "enum": [
+            "valid",
+            "no_parsed_ranking",
+            "invalid_schema",
+            "not_full_permutation",
+            "provider_failure"
+          ]
+        },
+        "ordered_candidate_ids": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/candidate_ids"}
+          ]
+        },
+        "latency_ms": {"type": "integer", "minimum": 0},
+        "usage": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        },
+        "started_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    },
+    "trial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event", "evaluation_kind", "repetition", "seed", "candidate_order",
+        "condition_order", "clean", "attack", "metrics"
+      ],
+      "properties": {
+        "event": {"const": "paired_trial"},
+        "evaluation_kind": {"enum": ["attack_pair", "clean_control"]},
+        "repetition": {"type": "integer", "minimum": 1},
+        "seed": {"type": "integer"},
+        "candidate_order": {"$ref": "#/$defs/candidate_ids"},
+        "condition_order": {"$ref": "#/$defs/condition_order"},
+        "clean": {"$ref": "#/$defs/attempt"},
+        "attack": {"$ref": "#/$defs/attempt"},
+        "metrics": {"type": ["object", "null"]}
+      }
+    },
+    "series_metrics": {
+      "type": "object",
+      "required": [
+        "pair_count", "valid_pair_count", "metric_denominator", "attempt_count",
+        "failed_attempt_count", "invalid_or_dos_count", "attempt_status_counts"
+      ],
+      "properties": {
+        "pair_count": {"type": "integer", "minimum": 1},
+        "valid_pair_count": {"type": "integer", "minimum": 0},
+        "metric_denominator": {"type": "integer", "minimum": 0},
+        "attempt_count": {"type": "integer", "minimum": 2},
+        "failed_attempt_count": {"type": "integer", "minimum": 0},
+        "invalid_or_dos_count": {"type": "integer", "minimum": 0},
+        "attempt_status_counts": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "series_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event", "evaluation_kind", "mutation_channel", "model", "openai_sdk_version",
+        "prompt_sha256", "implementation_tree_sha256", "mapper_timeout_seconds",
+        "mapper_max_retries", "extraction_mode", "target_candidate_id",
+        "changed_detail_candidate_ids", "changed_pdf_candidate_ids", "clean_cohort_sha256",
+        "attack_cohort_sha256", "clean_target_detail_sha256", "attack_target_detail_sha256",
+        "clean_target_pdf_sha256", "attack_target_pdf_sha256", "summary"
+      ],
+      "properties": {
+        "event": {"const": "paired_summary"},
+        "evaluation_kind": {"enum": ["attack_pair", "clean_control"]},
+        "mutation_channel": {"enum": ["pdf", "structured_detail", null]},
+        "model": {"type": "string", "minLength": 1},
+        "openai_sdk_version": {"type": "string", "minLength": 1},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "implementation_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "mapper_timeout_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "mapper_max_retries": {"const": 0},
+        "extraction_mode": {"enum": ["visible", "machine"]},
+        "target_candidate_id": {"$ref": "#/$defs/candidate_id"},
+        "changed_detail_candidate_ids": {"type": "array", "items": {"$ref": "#/$defs/candidate_id"}},
+        "changed_pdf_candidate_ids": {"type": "array", "items": {"$ref": "#/$defs/candidate_id"}},
+        "clean_cohort_sha256": {"$ref": "#/$defs/sha256"},
+        "attack_cohort_sha256": {"$ref": "#/$defs/sha256"},
+        "clean_target_detail_sha256": {"$ref": "#/$defs/sha256"},
+        "attack_target_detail_sha256": {"$ref": "#/$defs/sha256"},
+        "clean_target_pdf_sha256": {"$ref": "#/$defs/sha256"},
+        "attack_target_pdf_sha256": {"$ref": "#/$defs/sha256"},
+        "summary": {"$ref": "#/$defs/series_metrics"}
+      }
+    },
+    "bundle_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "event", "series_order", "condition_order_protocol",
+        "failure_retention", "pair_count_per_series", "trial_row_count",
+        "series_summary_row_count", "expected_row_count", "total_pair_count",
+        "total_attempt_count", "failed_attempt_count", "valid_pair_count",
+        "metric_denominator", "seeds", "candidate_order_sha256", "series_summary_sha256",
+        "model", "openai_sdk_version", "prompt_sha256", "implementation_tree_sha256",
+        "mapper_timeout_seconds", "mapper_max_retries", "extraction_mode",
+        "target_candidate_id", "mutation_channel", "clean_fixture_id",
+        "attack_fixture_id", "threat_class", "attacker_knowledge_level",
+        "clean_fixture_tree_sha256", "attack_fixture_tree_sha256",
+        "expected_clean_cohort_sha256", "expected_attack_cohort_sha256",
+        "clean_cohort_sha256",
+        "attack_cohort_sha256", "clean_control_cohort_sha256"
+      ],
+      "properties": {
+        "schema_version": {"const": 1},
+        "event": {"const": "paired_bundle_summary"},
+        "series_order": {"const": ["attack_pair", "clean_control"]},
+        "condition_order_protocol": {"const": "AB_BA_BY_REPETITION"},
+        "failure_retention": {"const": "ALL_ATTEMPTS_EMITTED"},
+        "pair_count_per_series": {"type": "integer", "minimum": 1},
+        "trial_row_count": {"type": "integer", "minimum": 2},
+        "series_summary_row_count": {"const": 2},
+        "expected_row_count": {"type": "integer", "minimum": 5},
+        "total_pair_count": {"type": "integer", "minimum": 2},
+        "total_attempt_count": {"type": "integer", "minimum": 4},
+        "failed_attempt_count": {"type": "integer", "minimum": 0},
+        "valid_pair_count": {"type": "integer", "minimum": 0},
+        "metric_denominator": {"type": "integer", "minimum": 0},
+        "seeds": {"type": "array", "minItems": 1, "items": {"type": "integer"}},
+        "candidate_order_sha256": {"$ref": "#/$defs/sha256"},
+        "series_summary_sha256": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["attack_pair", "clean_control"],
+          "properties": {
+            "attack_pair": {"$ref": "#/$defs/sha256"},
+            "clean_control": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "model": {"type": "string", "minLength": 1},
+        "openai_sdk_version": {"type": "string", "minLength": 1},
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "implementation_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "mapper_timeout_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "mapper_max_retries": {"const": 0},
+        "extraction_mode": {"enum": ["visible", "machine"]},
+        "target_candidate_id": {"$ref": "#/$defs/candidate_id"},
+        "mutation_channel": {"enum": ["pdf", "structured_detail"]},
+        "clean_fixture_id": {"const": "clean"},
+        "attack_fixture_id": {"const": "structured_note_directive"},
+        "threat_class": {"const": "structured_field_directive"},
+        "attacker_knowledge_level": {"const": "K1_PUBLIC_TASK_CONTEXT"},
+        "clean_fixture_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "attack_fixture_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "expected_clean_cohort_sha256": {"$ref": "#/$defs/sha256"},
+        "expected_attack_cohort_sha256": {"$ref": "#/$defs/sha256"},
+        "clean_cohort_sha256": {"$ref": "#/$defs/sha256"},
+        "attack_cohort_sha256": {"$ref": "#/$defs/sha256"},
+        "clean_control_cohort_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "archive_kind": "byte_preserved_v1_evidence",
+  "implementation_tree_sha256": "086b97479e208c32584d3d79560b3d559b5214d6b79ec0701333340fe0142f71",
+  "files": {
+    "deterministic-summary.json": "1a651020e4377f2b8c698915e133f4d338e69c9462eda19f8724b79da6c0bb7b",
+    "deterministic.manifest.json": "5b71070553026029b24dda65db5fd0e347760f6afd07c60d6b8d7f90af725b33",
+    "manifest.json": "db52c3d897ac09491e9fad364f14875e882902d4471d8cbd8959ecb85f8a532d",
+    "naive-pairs.jsonl": "b6126ebdd965ff3b6bb869b6e2a319cdcd10b358c5c63889c51f9f6fb50acc0a",
+    "results.generated.md": "94b8a1c75882523acbf4643aae7339eeaa9b02b4044acbe4bc6ba824184c7d38",
+    "secure-smokes.jsonl": "44c93b09117f6ed7ada8f63ce882cc196d7334fdddad052447681ac62a79d50d",
+    "secure-smokes.manifest.json": "8cfce81f729857e4008ff84a567093d72a0714e37b69bd15ec5e1d7192d75698"
+  },
+  "status": "historical_v1_not_upgraded"
+}

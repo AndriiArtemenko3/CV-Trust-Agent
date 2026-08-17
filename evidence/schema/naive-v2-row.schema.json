@@ -1,0 +1,330 @@
+{
+  "$defs": {
+    "FailedRankingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "ordered_candidate_ids": {
+          "default": null,
+          "title": "Ordered Candidate Ids",
+          "type": "null"
+        },
+        "status": {
+          "enum": [
+            "no_parsed_ranking",
+            "invalid_schema",
+            "not_full_permutation",
+            "provider_failure"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "FailedRankingV2",
+      "type": "object"
+    },
+    "UsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "input_tokens": {
+          "anyOf": [
+            {
+              "maximum": 100000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "maximum": 100000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Tokens"
+        },
+        "total_tokens": {
+          "anyOf": [
+            {
+              "maximum": 100000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Tokens"
+        }
+      },
+      "title": "UsageV2",
+      "type": "object"
+    },
+    "ValidRankingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "ordered_candidate_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 10,
+          "minItems": 10,
+          "title": "Ordered Candidate Ids",
+          "type": "array"
+        },
+        "status": {
+          "const": "valid",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "ordered_candidate_ids"
+      ],
+      "title": "ValidRankingV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://cv-trust-agent.invalid/evidence/schema/naive-v2-row.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attack_cohort_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Attack Cohort Sha256",
+      "type": "string"
+    },
+    "attack_fixture_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Attack Fixture Tree Sha256",
+      "type": "string"
+    },
+    "attacker_knowledge_level": {
+      "const": "K1_PUBLIC_TASK_CONTEXT",
+      "title": "Attacker Knowledge Level",
+      "type": "string"
+    },
+    "block_id": {
+      "maximum": 8,
+      "minimum": 1,
+      "title": "Block Id",
+      "type": "integer"
+    },
+    "call_position": {
+      "maximum": 4,
+      "minimum": 1,
+      "title": "Call Position",
+      "type": "integer"
+    },
+    "call_role": {
+      "enum": [
+        "attack_clean",
+        "attack_directive",
+        "control_first",
+        "control_second"
+      ],
+      "title": "Call Role",
+      "type": "string"
+    },
+    "candidate_order": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+        "type": "string"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "title": "Candidate Order",
+      "type": "array"
+    },
+    "changed_detail_candidate_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+        "type": "string"
+      },
+      "maxItems": 1,
+      "title": "Changed Detail Candidate Ids",
+      "type": "array"
+    },
+    "changed_pdf_candidate_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+        "type": "string"
+      },
+      "maxItems": 1,
+      "title": "Changed Pdf Candidate Ids",
+      "type": "array"
+    },
+    "clean_cohort_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Clean Cohort Sha256",
+      "type": "string"
+    },
+    "clean_fixture_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Clean Fixture Tree Sha256",
+      "type": "string"
+    },
+    "event": {
+      "const": "naive_attempt_v2",
+      "title": "Event",
+      "type": "string"
+    },
+    "extraction_mode": {
+      "enum": [
+        "visible",
+        "machine"
+      ],
+      "title": "Extraction Mode",
+      "type": "string"
+    },
+    "implementation_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Implementation Tree Sha256",
+      "type": "string"
+    },
+    "input_cohort_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Cohort Sha256",
+      "type": "string"
+    },
+    "latency_ms": {
+      "maximum": 3600000,
+      "minimum": 0,
+      "title": "Latency Ms",
+      "type": "integer"
+    },
+    "mapper_max_retries": {
+      "const": 0,
+      "title": "Mapper Max Retries",
+      "type": "integer"
+    },
+    "mapper_timeout_seconds": {
+      "exclusiveMinimum": 0,
+      "maximum": 600,
+      "title": "Mapper Timeout Seconds",
+      "type": "number"
+    },
+    "model_identifier": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+-]{0,79}$",
+      "title": "Model Identifier",
+      "type": "string"
+    },
+    "mutation_channel": {
+      "enum": [
+        "pdf",
+        "structured_detail"
+      ],
+      "title": "Mutation Channel",
+      "type": "string"
+    },
+    "prompt_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Prompt Sha256",
+      "type": "string"
+    },
+    "result": {
+      "discriminator": {
+        "mapping": {
+          "invalid_schema": "#/$defs/FailedRankingV2",
+          "no_parsed_ranking": "#/$defs/FailedRankingV2",
+          "not_full_permutation": "#/$defs/FailedRankingV2",
+          "provider_failure": "#/$defs/FailedRankingV2",
+          "valid": "#/$defs/ValidRankingV2"
+        },
+        "propertyName": "status"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ValidRankingV2"
+        },
+        {
+          "$ref": "#/$defs/FailedRankingV2"
+        }
+      ],
+      "title": "Result"
+    },
+    "schema_version": {
+      "const": 2,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "sdk_version": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+-]{0,79}$",
+      "title": "Sdk Version",
+      "type": "string"
+    },
+    "seed": {
+      "maximum": 9223372036854775807,
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "target_candidate_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+      "title": "Target Candidate Id",
+      "type": "string"
+    },
+    "threat_class": {
+      "const": "structured_field_directive",
+      "title": "Threat Class",
+      "type": "string"
+    },
+    "usage": {
+      "$ref": "#/$defs/UsageV2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event",
+    "block_id",
+    "seed",
+    "call_role",
+    "call_position",
+    "candidate_order",
+    "started_at",
+    "latency_ms",
+    "usage",
+    "model_identifier",
+    "sdk_version",
+    "prompt_sha256",
+    "implementation_tree_sha256",
+    "mapper_timeout_seconds",
+    "mapper_max_retries",
+    "extraction_mode",
+    "target_candidate_id",
+    "mutation_channel",
+    "clean_fixture_tree_sha256",
+    "attack_fixture_tree_sha256",
+    "clean_cohort_sha256",
+    "attack_cohort_sha256",
+    "input_cohort_sha256",
+    "changed_detail_candidate_ids",
+    "changed_pdf_candidate_ids",
+    "threat_class",
+    "attacker_knowledge_level",
+    "result"
+  ],
+  "title": "NaiveAttemptV2",
+  "type": "object"
+}

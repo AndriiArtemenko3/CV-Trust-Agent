@@ -1,0 +1,157 @@
+{
+  "artifacts": [],
+  "command": [
+    "python",
+    "-m",
+    "evaluation",
+    "live-all",
+    "--execute-live-api",
+    "--output",
+    "evidence/secure-smokes.jsonl",
+    "--repository-root",
+    ".",
+    "--cv-trust-bin",
+    "cv-trust",
+    "--heldout-model",
+    "gpt-5.4-mini-2026-03-17"
+  ],
+  "fixtures": [
+    {
+      "path": "generated/applications.json",
+      "sha256": "a14d7b9de49743d5aa8b968c5f4d603df7060b409aac1789949ea53e31902982"
+    },
+    {
+      "path": "generated/details/AP-001.json",
+      "sha256": "71a7def73330b5cb21695c984bab48a49f97c018d40d511022e685eb02e8273c"
+    },
+    {
+      "path": "generated/details/AP-002.json",
+      "sha256": "e986a3205e7f389c1bf98e652e5ba2c66738928878a3505dbc16ace182777e4e"
+    },
+    {
+      "path": "generated/details/AP-003.json",
+      "sha256": "c152325cdb7a7c8d4b20f256035bfb382e9c88d8a4583a0d8936ebe5d3fc8038"
+    },
+    {
+      "path": "generated/details/AP-004.json",
+      "sha256": "972f8fda30840aea6abe59b948b1600d302559330fb3b6022e92ebe623eaf640"
+    },
+    {
+      "path": "generated/details/AP-005.json",
+      "sha256": "9b955870c8a30c5f176109a5c3c1164a4ec15c46da8b54d6406f2defefaf255b"
+    },
+    {
+      "path": "generated/details/AP-006.json",
+      "sha256": "b3d4cb3b094f307d7e4b3036821685d383868ae9a972cb001b2e11d53193f5a4"
+    },
+    {
+      "path": "generated/details/AP-007.json",
+      "sha256": "e057ad55bd09f058d739063b3b8f274819e051773fce1b3dbec7f6b2952d6ed8"
+    },
+    {
+      "path": "generated/details/AP-008.json",
+      "sha256": "ce00408388c75ab20acda4c360e9cc79093510c383c325098232a99730e4d343"
+    },
+    {
+      "path": "generated/details/AP-009.json",
+      "sha256": "027d2383dbbc0ac88cac5a64492327288a0ac8aadfa33e18ee07512e7f93653e"
+    },
+    {
+      "path": "generated/details/AP-010.json",
+      "sha256": "307038ca68318b65f48c7ab45858fce230f608a75e0fe868a78a3470dc835a7c"
+    },
+    {
+      "path": "generated/resumes/AP-001.pdf",
+      "sha256": "7c6530e5297a404fd3ec302e2d0459fc215cad10a0bb3ef8412db451ae3c5a1e"
+    },
+    {
+      "path": "generated/resumes/AP-002.pdf",
+      "sha256": "06cf3e2af5eb2c05c3ceda8419a135fae91108dd7b51668ff5bb8bf12c3fb0ad"
+    },
+    {
+      "path": "generated/resumes/AP-003.pdf",
+      "sha256": "9370e1c1b317294fc650ca00386a0e24ae0d35e20a33d8d97e29251a2240e48c"
+    },
+    {
+      "path": "generated/resumes/AP-004.pdf",
+      "sha256": "6cc0c2c0cc539e136dc602cdd5e50231489d7d31a087b7dd8a6cebc5f4ba0f04"
+    },
+    {
+      "path": "generated/resumes/AP-005.pdf",
+      "sha256": "2dd6a31f1752960c0bbe71818e926873b58a2a5ad6386906739a78543146c043"
+    },
+    {
+      "path": "generated/resumes/AP-006.pdf",
+      "sha256": "1df1f897b539c1ce4e8fffd5d8933212586a0bbedfa708b54f2a48f858a19543"
+    },
+    {
+      "path": "generated/resumes/AP-007.pdf",
+      "sha256": "162266e1fb08bcf1f18c98329adc8ff21517dc8cc6621eda8690759522ce1cb1"
+    },
+    {
+      "path": "generated/resumes/AP-008.pdf",
+      "sha256": "d6e7bbc4c2d7f1489219b95a4432cc224ac99d5219c16d9e4141c41d40d16c53"
+    },
+    {
+      "path": "generated/resumes/AP-009.pdf",
+      "sha256": "6f74815e02fe73b18c0e31779cbc8ab484dc2036bce05bed791e7beb9794ec8c"
+    },
+    {
+      "path": "generated/resumes/AP-010.pdf",
+      "sha256": "afd11c5c844d39c4df01df51d9704dff86ce222b0a3505837b7619c3c6cfd708"
+    },
+    {
+      "path": "heldout/clean/AP-101.pdf",
+      "sha256": "f1d5ea68d159a9bf59c429c0d301b61f718de7976138e565d0f71f2a8e4bf32b"
+    },
+    {
+      "path": "heldout/clean/AP-102.pdf",
+      "sha256": "728203f7c4859ef3c2c25ac7caa78c8a4a2bba4a7a0fee512cd782ca5b4a5724"
+    },
+    {
+      "path": "heldout/clean/AP-103.pdf",
+      "sha256": "8dc9c458cb886d97fdb261f41e1cb1f22058e0aa45f54e17498e15de577a5273"
+    },
+    {
+      "path": "heldout/clean/AP-104.pdf",
+      "sha256": "e0df41ff8c9a426807032f2423f3ca8524af5d8802c5c0083617e378fc87f638"
+    },
+    {
+      "path": "heldout/directive/AP-101.pdf",
+      "sha256": "f1d5ea68d159a9bf59c429c0d301b61f718de7976138e565d0f71f2a8e4bf32b"
+    },
+    {
+      "path": "heldout/directive/AP-102.pdf",
+      "sha256": "5aa4ab7cffcc380009a462afc05eec5e63922ae9d78842bb235f19e768d2d332"
+    },
+    {
+      "path": "heldout/directive/AP-103.pdf",
+      "sha256": "8dc9c458cb886d97fdb261f41e1cb1f22058e0aa45f54e17498e15de577a5273"
+    },
+    {
+      "path": "heldout/directive/AP-104.pdf",
+      "sha256": "e0df41ff8c9a426807032f2423f3ca8524af5d8802c5c0083617e378fc87f638"
+    },
+    {
+      "path": "source/clean",
+      "sha256": "f350913e7cf6c751dec586ee43edba2ef30d5d666c38ca08f045fb87ca8aef5c"
+    },
+    {
+      "path": "source/structured_note_directive",
+      "sha256": "666e386e2db8b5a0d1d210b8c7f8c8965d6211822d23b167596e728723521de7"
+    }
+  ],
+  "generated_at": "2026-08-16T03:30:07.914582+00:00",
+  "implementation_tree_sha256": "b33585bf0528aa166a9bd4601ef930e41cb90ea4bffc9cd34327a01a44603a4f",
+  "live_artifacts": [
+    {
+      "kind": "secure_smokes",
+      "path": "secure-smokes.jsonl",
+      "sha256": "67dc6128b04830a21a2ec67300b438d25bac94edf07d325d2e7e593dc1f4dd2a"
+    }
+  ],
+  "live_status": "executed",
+  "model_identifier": "combined-model-set:ec1a9cea5d3f82a5ed54e4ef",
+  "redaction_version": "bounded-evidence-v1",
+  "schema_version": 1
+}

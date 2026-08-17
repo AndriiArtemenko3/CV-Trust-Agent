@@ -1,0 +1,220 @@
+{
+  "$defs": {
+    "ArtifactEntryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "deterministic",
+            "secure",
+            "naive"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "enum": [
+            "deterministic-v2.json",
+            "secure-v2.jsonl",
+            "naive-v2.jsonl"
+          ],
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "title": "ArtifactEntryV2",
+      "type": "object"
+    },
+    "SecureArmEntryV2": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "source_max_attempts": {
+                "type": "null"
+              },
+              "source_timeout_seconds": {
+                "type": "null"
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "arm": {
+                "const": "canonical"
+              }
+            },
+            "required": [
+              "arm"
+            ]
+          },
+          "then": {
+            "properties": {
+              "source_max_attempts": {
+                "const": 1,
+                "type": "integer"
+              },
+              "source_timeout_seconds": {
+                "const": 0.5,
+                "type": "number"
+              }
+            },
+            "required": [
+              "source_timeout_seconds",
+              "source_max_attempts"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "arm": {
+          "enum": [
+            "canonical",
+            "heldout"
+          ],
+          "title": "Arm",
+          "type": "string"
+        },
+        "mapper_max_retries": {
+          "const": 0,
+          "title": "Mapper Max Retries",
+          "type": "integer"
+        },
+        "mapper_timeout_seconds": {
+          "exclusiveMinimum": 0,
+          "maximum": 600,
+          "title": "Mapper Timeout Seconds",
+          "type": "number"
+        },
+        "model_identifier": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+-]{0,79}$",
+          "title": "Model Identifier",
+          "type": "string"
+        },
+        "prompt_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Prompt Sha256",
+          "type": "string"
+        },
+        "sdk_version": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+-]{0,79}$",
+          "title": "Sdk Version",
+          "type": "string"
+        },
+        "source_max_attempts": {
+          "anyOf": [
+            {
+              "const": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Max Attempts"
+        },
+        "source_timeout_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 60,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Timeout Seconds"
+        }
+      },
+      "required": [
+        "arm",
+        "model_identifier",
+        "sdk_version",
+        "prompt_sha256",
+        "mapper_timeout_seconds",
+        "mapper_max_retries"
+      ],
+      "title": "SecureArmEntryV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://cv-trust-agent.invalid/evidence/schema/manifest-v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_kind": {
+      "const": "release_manifest_v2",
+      "title": "Artifact Kind",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/ArtifactEntryV2"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "deterministic_oracle_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Deterministic Oracle Sha256",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "heldout_oracle_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Heldout Oracle Sha256",
+      "type": "string"
+    },
+    "implementation_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Implementation Tree Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 2,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "secure_arm_configurations": {
+      "items": {
+        "$ref": "#/$defs/SecureArmEntryV2"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Secure Arm Configurations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "generated_at",
+    "implementation_tree_sha256",
+    "deterministic_oracle_sha256",
+    "heldout_oracle_sha256",
+    "artifacts",
+    "secure_arm_configurations"
+  ],
+  "title": "ReleaseManifestV2",
+  "type": "object"
+}

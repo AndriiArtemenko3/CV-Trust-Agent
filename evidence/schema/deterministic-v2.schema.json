@@ -1,0 +1,1353 @@
+{
+  "$defs": {
+    "CommandV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Candidate Id"
+        },
+        "command_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Command Id",
+          "type": "string"
+        },
+        "dependency_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Dependency Ids",
+          "type": "array"
+        },
+        "kind": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Kind",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "record",
+            "batch"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command_id",
+        "kind",
+        "scope",
+        "dependency_ids"
+      ],
+      "title": "CommandV2",
+      "type": "object"
+    },
+    "CorroborationRequestV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "reason_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "requested_evidence_kinds": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Requested Evidence Kinds",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_ids",
+        "reason_codes",
+        "requested_evidence_kinds"
+      ],
+      "title": "CorroborationRequestV2",
+      "type": "object"
+    },
+    "DecisionProjectionV2": {
+      "additionalProperties": false,
+      "description": "The complete, bounded semantics independently reconstructed at release.",
+      "properties": {
+        "batch_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "batch_state": {
+          "enum": [
+            "USABLE",
+            "DEGRADED",
+            "QUARANTINED",
+            "UNAVAILABLE"
+          ],
+          "title": "Batch State",
+          "type": "string"
+        },
+        "corroboration_requests": {
+          "items": {
+            "$ref": "#/$defs/CorroborationRequestV2"
+          },
+          "maxItems": 50,
+          "title": "Corroboration Requests",
+          "type": "array"
+        },
+        "execution_mode": {
+          "enum": [
+            "EXECUTED",
+            "FAILED_CLOSED"
+          ],
+          "title": "Execution Mode",
+          "type": "string"
+        },
+        "explanations": {
+          "items": {
+            "$ref": "#/$defs/ExplanationV2"
+          },
+          "maxItems": 50,
+          "title": "Explanations",
+          "type": "array"
+        },
+        "plan_diff": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanDiffV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "plans": {
+          "items": {
+            "$ref": "#/$defs/PlanV2"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Plans",
+          "type": "array"
+        },
+        "prohibited_actions": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Prohibited Actions",
+          "type": "array"
+        },
+        "ranking_scope": {
+          "enum": [
+            "COMPLETE",
+            "PARTIAL",
+            "NONE"
+          ],
+          "title": "Ranking Scope",
+          "type": "string"
+        },
+        "receipts": {
+          "items": {
+            "$ref": "#/$defs/ReceiptV2"
+          },
+          "maxItems": 512,
+          "title": "Receipts",
+          "type": "array"
+        },
+        "routes": {
+          "items": {
+            "$ref": "#/$defs/RouteV2"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Routes",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": 2,
+          "default": 2,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "snapshot_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "strategy": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Strategy",
+          "type": "string"
+        },
+        "trust_gates": {
+          "items": {
+            "$ref": "#/$defs/TrustGateV2"
+          },
+          "maxItems": 1024,
+          "title": "Trust Gates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "batch_id",
+        "snapshot_id",
+        "strategy",
+        "ranking_scope",
+        "execution_mode",
+        "batch_state",
+        "plans",
+        "receipts",
+        "trust_gates",
+        "routes",
+        "corroboration_requests",
+        "explanations",
+        "prohibited_actions"
+      ],
+      "title": "DecisionProjectionV2",
+      "type": "object"
+    },
+    "DerivedFeatureV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "dependency_fact_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Dependency Fact Ids",
+          "type": "array"
+        },
+        "dependency_feature_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Dependency Feature Ids",
+          "type": "array"
+        },
+        "feature_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Feature Id",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "normalized_value": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Value"
+        },
+        "snapshot_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "feature_id",
+        "candidate_id",
+        "snapshot_id",
+        "name",
+        "dependency_fact_ids",
+        "dependency_feature_ids"
+      ],
+      "title": "DerivedFeatureV2",
+      "type": "object"
+    },
+    "EvidenceRefV2": {
+      "additionalProperties": false,
+      "properties": {
+        "admissible": {
+          "title": "Admissible",
+          "type": "boolean"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "maxItems": 4,
+              "minItems": 4,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "document_page_count": {
+          "anyOf": [
+            {
+              "maximum": 10,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Page Count"
+        },
+        "evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "field_path": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.\\[\\]-]{0,159}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field Path"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "maximum": 10,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "page_height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Height"
+        },
+        "page_width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Width"
+        },
+        "semantic_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Semantic Hash",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "source_kind": {
+          "enum": [
+            "application_json",
+            "resume_visible",
+            "resume_non_visible",
+            "pdf_metadata"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "visible": {
+          "title": "Visible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "candidate_id",
+        "snapshot_id",
+        "source_kind",
+        "visible",
+        "admissible",
+        "semantic_hash"
+      ],
+      "title": "EvidenceRefV2",
+      "type": "object"
+    },
+    "ExplanationV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Candidate Id"
+        },
+        "reason_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "template": {
+          "enum": [
+            "record_degraded",
+            "record_quarantined",
+            "candidate_unavailable",
+            "batch_held",
+            "strategy_selected"
+          ],
+          "title": "Template",
+          "type": "string"
+        }
+      },
+      "required": [
+        "template",
+        "reason_codes"
+      ],
+      "title": "ExplanationV2",
+      "type": "object"
+    },
+    "PlanDiffV2": {
+      "additionalProperties": false,
+      "properties": {
+        "added_commands": {
+          "items": {
+            "$ref": "#/$defs/CommandV2"
+          },
+          "maxItems": 64,
+          "title": "Added Commands",
+          "type": "array"
+        },
+        "added_prohibitions": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Added Prohibitions",
+          "type": "array"
+        },
+        "from_version": {
+          "maximum": 2,
+          "minimum": 1,
+          "title": "From Version",
+          "type": "integer"
+        },
+        "granted_evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 3200,
+          "title": "Granted Evidence Ids",
+          "type": "array"
+        },
+        "objective_after": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Objective After",
+          "type": "string"
+        },
+        "objective_before": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Objective Before",
+          "type": "string"
+        },
+        "removed_command_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Removed Command Ids",
+          "type": "array"
+        },
+        "revoked_evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 3200,
+          "title": "Revoked Evidence Ids",
+          "type": "array"
+        },
+        "strategy_after": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Strategy After",
+          "type": "string"
+        },
+        "strategy_before": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Strategy Before",
+          "type": "string"
+        },
+        "to_version": {
+          "maximum": 3,
+          "minimum": 2,
+          "title": "To Version",
+          "type": "integer"
+        },
+        "trigger_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Trigger Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "from_version",
+        "to_version",
+        "strategy_before",
+        "strategy_after",
+        "objective_before",
+        "objective_after",
+        "trigger_codes",
+        "removed_command_ids",
+        "added_commands",
+        "revoked_evidence_ids",
+        "granted_evidence_ids",
+        "added_prohibitions"
+      ],
+      "title": "PlanDiffV2",
+      "type": "object"
+    },
+    "PlanV2": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 3200,
+          "title": "Allowed Evidence Ids",
+          "type": "array"
+        },
+        "commands": {
+          "items": {
+            "$ref": "#/$defs/CommandV2"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Commands",
+          "type": "array"
+        },
+        "objective": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Objective",
+          "type": "string"
+        },
+        "prohibited_actions": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Prohibited Actions",
+          "type": "array"
+        },
+        "strategy": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Strategy",
+          "type": "string"
+        },
+        "trigger_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Trigger Codes",
+          "type": "array"
+        },
+        "version": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version",
+        "objective",
+        "strategy",
+        "commands",
+        "trigger_codes",
+        "allowed_evidence_ids",
+        "prohibited_actions"
+      ],
+      "title": "PlanV2",
+      "type": "object"
+    },
+    "RankKeyV2": {
+      "additionalProperties": false,
+      "properties": {
+        "band_priority": {
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Band Priority",
+          "type": "integer"
+        },
+        "corroborated_claim_count": {
+          "maximum": 64,
+          "minimum": 0,
+          "title": "Corroborated Claim Count",
+          "type": "integer"
+        },
+        "essentials_count": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Essentials Count",
+          "type": "integer"
+        },
+        "preferred_count": {
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Preferred Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "band_priority",
+        "essentials_count",
+        "preferred_count",
+        "corroborated_claim_count"
+      ],
+      "title": "RankKeyV2",
+      "type": "object"
+    },
+    "ReceiptV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Candidate Id"
+        },
+        "command_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Command Id",
+          "type": "string"
+        },
+        "command_kind": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Command Kind",
+          "type": "string"
+        },
+        "consumed_gate_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Consumed Gate Ids",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 3200,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "plan_version": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Plan Version",
+          "type": "integer"
+        },
+        "produced_gate_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Produced Gate Id"
+        },
+        "reason_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "receipt_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Receipt Id",
+          "type": "string"
+        },
+        "sequence": {
+          "maximum": 512,
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "started",
+            "completed",
+            "restricted",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "receipt_id",
+        "sequence",
+        "plan_version",
+        "command_id",
+        "command_kind",
+        "status",
+        "reason_codes",
+        "evidence_ids",
+        "consumed_gate_ids"
+      ],
+      "title": "ReceiptV2",
+      "type": "object"
+    },
+    "RouteV2": {
+      "additionalProperties": false,
+      "properties": {
+        "band": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Band",
+          "type": "string"
+        },
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "display_position": {
+          "anyOf": [
+            {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Display Position"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 512,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "evidence_rank": {
+          "anyOf": [
+            {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Rank"
+        },
+        "queue": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Queue",
+          "type": "string"
+        },
+        "rank_key": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RankKeyV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "reason_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "snapshot_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "support_graph": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportGraphV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "candidate_id",
+        "snapshot_id",
+        "band",
+        "queue",
+        "reason_codes",
+        "evidence_ids"
+      ],
+      "title": "RouteV2",
+      "type": "object"
+    },
+    "SupportGraphV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 512,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "evidence_manifest": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRefV2"
+          },
+          "maxItems": 512,
+          "title": "Evidence Manifest",
+          "type": "array"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/SupportedFactV2"
+          },
+          "maxItems": 64,
+          "title": "Facts",
+          "type": "array"
+        },
+        "features": {
+          "items": {
+            "$ref": "#/$defs/DerivedFeatureV2"
+          },
+          "maxItems": 128,
+          "title": "Features",
+          "type": "array"
+        },
+        "route_support_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Route Support Ids",
+          "type": "array"
+        },
+        "snapshot_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "snapshot_id",
+        "evidence_ids",
+        "evidence_manifest",
+        "facts",
+        "features",
+        "route_support_ids"
+      ],
+      "title": "SupportGraphV2",
+      "type": "object"
+    },
+    "SupportedEmploymentIntervalV2": {
+      "additionalProperties": false,
+      "properties": {
+        "end_date": {
+          "format": "date",
+          "title": "End Date",
+          "type": "string"
+        },
+        "end_evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "End Evidence Id",
+          "type": "string"
+        },
+        "start_date": {
+          "format": "date",
+          "title": "Start Date",
+          "type": "string"
+        },
+        "start_evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Start Evidence Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_date",
+        "end_date",
+        "start_evidence_id",
+        "end_evidence_id"
+      ],
+      "title": "SupportedEmploymentIntervalV2",
+      "type": "object"
+    },
+    "SupportedFactV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "canonical_value": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9 ]{0,78}[A-Za-z0-9])?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical Value"
+        },
+        "canonical_value_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical Value Sha256"
+        },
+        "employment_intervals": {
+          "items": {
+            "$ref": "#/$defs/SupportedEmploymentIntervalV2"
+          },
+          "maxItems": 32,
+          "title": "Employment Intervals",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "fact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Fact Id",
+          "type": "string"
+        },
+        "kind": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Kind",
+          "type": "string"
+        },
+        "normalization_mode": {
+          "anyOf": [
+            {
+              "const": "bounded_allow_list_v1",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalization Mode"
+        },
+        "normalized_value": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Value"
+        },
+        "snapshot_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "source_roles": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Source Roles",
+          "type": "array"
+        },
+        "source_value": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9 ]{0,78}[A-Za-z0-9])?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Value"
+        }
+      },
+      "required": [
+        "fact_id",
+        "candidate_id",
+        "snapshot_id",
+        "kind",
+        "source_roles",
+        "evidence_ids",
+        "employment_intervals"
+      ],
+      "title": "SupportedFactV2",
+      "type": "object"
+    },
+    "TrustGateV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Candidate Id"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 3200,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "gate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+          "title": "Gate Id",
+          "type": "string"
+        },
+        "input_gate_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:+/-]{0,159}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "title": "Input Gate Ids",
+          "type": "array"
+        },
+        "outcome": {
+          "enum": [
+            "ALLOW",
+            "RESTRICT",
+            "QUARANTINE",
+            "UNAVAILABLE",
+            "HOLD"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "reason_codes": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "scope": {
+          "enum": [
+            "record",
+            "batch"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Snapshot Id"
+        },
+        "stage": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Stage",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "USABLE",
+            "DEGRADED",
+            "QUARANTINED",
+            "UNAVAILABLE"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gate_id",
+        "stage",
+        "scope",
+        "state",
+        "outcome",
+        "reason_codes",
+        "evidence_ids",
+        "input_gate_ids"
+      ],
+      "title": "TrustGateV2",
+      "type": "object"
+    },
+    "_DeterministicCaseSchemaV2": {
+      "additionalProperties": false,
+      "properties": {
+        "case_name": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Case Name",
+          "type": "string"
+        },
+        "fixture_id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,79}$",
+          "title": "Fixture Id",
+          "type": "string"
+        },
+        "fixture_tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Fixture Tree Sha256",
+          "type": "string"
+        },
+        "projection": {
+          "$ref": "#/$defs/DecisionProjectionV2"
+        }
+      },
+      "required": [
+        "case_name",
+        "fixture_id",
+        "fixture_tree_sha256",
+        "projection"
+      ],
+      "title": "_DeterministicCaseSchemaV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://cv-trust-agent.invalid/evidence/schema/deterministic-v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_kind": {
+      "const": "deterministic_observations_v2",
+      "title": "Artifact Kind",
+      "type": "string"
+    },
+    "implementation_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Implementation Tree Sha256",
+      "type": "string"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/_DeterministicCaseSchemaV2"
+      },
+      "maxItems": 25,
+      "minItems": 25,
+      "title": "Observations",
+      "type": "array"
+    },
+    "oracle_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Oracle Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 2,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "oracle_sha256",
+    "implementation_tree_sha256",
+    "observations"
+  ],
+  "title": "_DeterministicArtifactSchemaV2",
+  "type": "object"
+}
