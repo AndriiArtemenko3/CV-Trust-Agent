@@ -40,8 +40,36 @@ MAX_EXTRACTED_CHARACTERS = 100_000
 MAX_PDF_LINES = 2_048
 MAX_PDF_METADATA_ITEMS = 64
 MAX_PDF_RESULT_BYTES = 8 * 1024 * 1024
-PDF_DOCUMENT_TIMEOUT_SECONDS = 2.0
-PDF_BATCH_TIMEOUT_SECONDS = 20.0
+
+
+def _positive_float_env(name: str, default: float) -> float:
+    """Read a positive, finite float from the environment, else the default.
+
+    The defaults are the frozen wall-deadline security bounds. An environment
+    override only *relaxes* the wall deadline for slow test or CI hosts, where a
+    cold ``spawn`` worker plus ``pdfplumber`` import can approach the default; it
+    never tightens the bound and does not change parse results. Production and
+    local runs leave the variables unset and keep the 2-second document deadline.
+    """
+
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = float(raw)
+    except ValueError:
+        return default
+    if not math.isfinite(value) or value <= 0:
+        return default
+    return value
+
+
+PDF_DOCUMENT_TIMEOUT_SECONDS: Final[float] = _positive_float_env(
+    "CV_TRUST_PDF_DOCUMENT_TIMEOUT_SECONDS", 2.0
+)
+PDF_BATCH_TIMEOUT_SECONDS: Final[float] = _positive_float_env(
+    "CV_TRUST_PDF_BATCH_TIMEOUT_SECONDS", 20.0
+)
 MICROTEXT_MAX_FONT_SIZE = 4.0
 _MAX_CHARACTER_RECORDS = 100_000
 _WORKER_ADDRESS_SPACE_BYTES = 512 * 1024 * 1024

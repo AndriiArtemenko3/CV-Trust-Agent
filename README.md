@@ -227,7 +227,13 @@ builds the wheel, and smoke-tests it in a fresh environment.
   (sha256 `c8aebaaa…8945c12`), secure and naive attempt files, two fsynced hash-chained slot
   ledgers (84 + 32 slots, zero failed/unobserved), and the binding manifest
   (sha256 `fb7830e8…774a620`), all bound to implementation tree `9b3fe532…c2c527e` and run id
-  `v24-20260817-r1`. The 116 provider calls consumed ~312k tokens.
+  `v24-20260817-r1`. The 116 provider calls consumed ~312k tokens. This exact tree is tagged
+  [`v2.4-paid-run`](https://github.com/AndriiArtemenko3/CV-Trust-Agent/releases/tag/v2.4-paid-run):
+  check it out to validate the paid bundle coherently (`python -m evaluation v22-validate`). Later
+  commits on `main` carry a CI-portability patch — the isolated PDF parser's wall deadline is now
+  env-configurable so GitHub's slow runners get headroom, with the 2-second default unchanged for
+  local and production runs — which moves the tree, so on `main`'s HEAD the paid evidence is bound
+  to the tagged tree rather than to HEAD.
 - Preregistrations: `evaluation/preregistration_v22.md` (historical), `…_v23.md` (the `oneOf`
   correction), `…_v24.md` (postmortem, all disclosed corrections, per-arm models, preflight
   ledger).
